@@ -60,14 +60,14 @@ def fill_data(path, accounts, census):
         reader = csv.DictReader(csvfile, delimiter=',')
         for idx, line in enumerate(reader):
             if idx != 0:
-                if line['dep'] not in ['970', '97', '977']:
-                    accounts[line['dep']][line['jour']][line['clage_vacsi']]["n_dose1"] = int(line["n_dose1"])
-                    accounts[line['dep']][line['jour']][line['clage_vacsi']]["n_cum_dose1"] = int(line["n_cum_dose1"])
-                    accounts[line['dep']][line['jour']][line['clage_vacsi']]["taux"] = (int(line["n_cum_dose1"]) / int(census[line['dep']][line['clage_vacsi']])) * 100                
+                if line['dep'] not in ['970', '97', '977', '00']:
+                    accounts[line['dep']][line['jour']][line['clage_vacsi']]['n_dose1'] = int(line['n_dose1'])
+                    accounts[line['dep']][line['jour']][line['clage_vacsi']]['n_cum_dose1'] = int(line['n_cum_dose1'])
+                    accounts[line['dep']][line['jour']][line['clage_vacsi']]['taux'] = f'{(int(line["n_cum_dose1"]) / int(census[line["dep"]][line["clage_vacsi"]])) * 100:.2f}'
 
-                    accounts['france'][line['jour']][line['clage_vacsi']]["n_dose1"] += int(line["n_dose1"])
-                    accounts['france'][line['jour']][line['clage_vacsi']]["n_cum_dose1"] += int(line["n_cum_dose1"])
-                    accounts['france'][line['jour']][line['clage_vacsi']]["taux"] += (int(line["n_cum_dose1"]) / int(census['france'][line['clage_vacsi']])) * 100
+                    accounts['france'][line['jour']][line['clage_vacsi']]['n_dose1'] += int(line['n_dose1'])
+                    accounts['france'][line['jour']][line['clage_vacsi']]['n_cum_dose1'] += int(line['n_cum_dose1'])
+                    accounts['france'][line['jour']][line['clage_vacsi']]['taux'] += (int(line['n_cum_dose1']) / int(census['france'][line['clage_vacsi']])) * 100
 
     return accounts
 
