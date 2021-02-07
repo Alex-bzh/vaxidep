@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- User CSS -->
+    <link rel="stylesheet" type="text/css" href="./styles/layout.css"/>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+
+    <title>Évolution de la campagne de vaccination à la Covid-19 en France | Vaxidep</title>
+  </head>
+  <body>
+
+    <!-- The app -->
+    <div id="app" class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4">
+          <h1>La vaccination en France</h1>
+          <h2>{{ displayDate }}</h2>
+        </div>
+        <div class="col-lg-8">
+            <!-- Map -->
+            <fr-map ref="map" @zoom-dept="zoomDept"></fr-map>
+        </div>
+      </div>
+    </div>
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/fr.min.js"></script>
+
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- App -->
+    <script src="./app/main.js"></script>
+
+    <!-- Components -->
+    <script src="./app/components/fr-map.js"></script>
+    <!--<script src="./app/components/chart.js"></script>-->
+    <!--<script src="./app/components/timeline.js"></script>-->
+
+    <!-- Mount the app -->
+    <script>
+        const mountedApp = app.mount('#app');
+    </script>
+  </body>
+</html>
