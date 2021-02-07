@@ -117,67 +117,67 @@ app.component('fr-map', {
                             <th scope="row">0-24 ans</th>
                             <td>${department.properties.metrics[date][24].n_dose1}</td>
                             <td>${department.properties.metrics[date][24].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][24].taux}</td>
+                            <td>${department.properties.metrics[date][24].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">25-29 ans</th>
                             <td>${department.properties.metrics[date][29].n_dose1}</td>
                             <td>${department.properties.metrics[date][29].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][29].taux}</td>
+                            <td>${department.properties.metrics[date][29].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">30-39 ans</th>
                             <td>${department.properties.metrics[date][39].n_dose1}</td>
                             <td>${department.properties.metrics[date][39].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][39].taux}</td>
+                            <td>${department.properties.metrics[date][39].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">40-49 ans</th>
                             <td>${department.properties.metrics[date][49].n_dose1}</td>
                             <td>${department.properties.metrics[date][49].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][49].taux}</td>
+                            <td>${department.properties.metrics[date][49].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">50-59 ans</th>
                             <td>${department.properties.metrics[date][59].n_dose1}</td>
                             <td>${department.properties.metrics[date][59].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][59].taux}</td>
+                            <td>${department.properties.metrics[date][59].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">60-64 ans</th>
                             <td>${department.properties.metrics[date][64].n_dose1}</td>
                             <td>${department.properties.metrics[date][64].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][64].taux}</td>
+                            <td>${department.properties.metrics[date][64].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">65-69 ans</th>
                             <td>${department.properties.metrics[date][69].n_dose1}</td>
                             <td>${department.properties.metrics[date][69].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][69].taux}</td>
+                            <td>${department.properties.metrics[date][69].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">70-74 ans</th>
                             <td>${department.properties.metrics[date][74].n_dose1}</td>
                             <td>${department.properties.metrics[date][74].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][74].taux}</td>
+                            <td>${department.properties.metrics[date][74].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">75-79 ans</th>
                             <td>${department.properties.metrics[date][79].n_dose1}</td>
                             <td>${department.properties.metrics[date][79].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][79].taux}</td>
+                            <td>${department.properties.metrics[date][79].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">80 ans et +</th>
                             <td>${department.properties.metrics[date][80].n_dose1}</td>
                             <td>${department.properties.metrics[date][80].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][80].taux}</td>
+                            <td>${department.properties.metrics[date][80].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">Total</th>
                             <td>${department.properties.metrics[date][0].n_dose1}</td>
                             <td>${department.properties.metrics[date][0].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][0].taux}</td>
+                            <td>${department.properties.metrics[date][0].taux} %</td>
                         </tr>
                     </tbody>
                 </table>`;
