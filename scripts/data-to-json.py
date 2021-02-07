@@ -68,6 +68,11 @@ def fill_data(path, accounts, census):
                     accounts['france'][line['jour']][line['clage_vacsi']]['n_dose1'] += int(line['n_dose1'])
                     accounts['france'][line['jour']][line['clage_vacsi']]['n_cum_dose1'] += int(line['n_cum_dose1'])
                     accounts['france'][line['jour']][line['clage_vacsi']]['taux'] += (int(line['n_cum_dose1']) / int(census['france'][line['clage_vacsi']])) * 100
+    
+    # Sorts the metrics by date
+    for dept in accounts:
+        accounts[dept] = dict(sorted(accounts[dept].items(), key=lambda item: item[0]))
+
 
     return accounts
 
