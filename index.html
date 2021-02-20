@@ -24,13 +24,7 @@
       <div class="row">
         <div class="col-lg-4">
           <h1>La vaccination en France</h1>
-          <h2>{{ displayDate }}</h2>
-          <!-- Timeline -->
-          <timeline
-            @change-layer="changeLayer"
-            @set-limit="setLimit"
-            @show-all="showAll"
-            ref="timeline"></timeline>
+          <h2>{{ dateToDisplay }}</h2>
             <!-- Metrics -->
             <chart class="mt-3" ref="chart"></chart>
         </div>
@@ -64,9 +58,8 @@
     <script src="./app/main.js"></script>
 
     <!-- Components -->
-    <!--<script src="./app/components/chart.js"></script>-->
+    <script src="./app/components/chart.js"></script>
     <script src="./app/components/fr-map.js"></script>
-    <script src="./app/components/timeline.js"></script>
 
     <!-- Mount the app -->
     <script>

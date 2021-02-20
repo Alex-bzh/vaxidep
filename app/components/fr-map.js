@@ -3,7 +3,6 @@ app.component('fr-map', {
     template: `<div id="map"></div>`,
     data: function() {
         return {
-            dateToDisplay: null,
             layer: null,
             map: null
         }
@@ -50,12 +49,9 @@ app.component('fr-map', {
         /*
         *   Initializes a GeoJSON layer.
         */
-        initGeoJSON(departments, date) {
+        initGeoJSON(departments) {
             // If defined, the previous layer is removed for optimization purposes
             if (this.layer) this.map.removeLayer(this.layer);
-            // If no date is selected, then considers the property date
-            // from the data
-            this.dateToDisplay = moment(date);
             // GeoJSON layer
             this.layer = L.geoJSON(departments, {
                 style: this.setStyle,
@@ -100,84 +96,71 @@ app.component('fr-map', {
         *   Sets the popup on a particular department.
         */
         setPopup(department, layer) {
-            let date = this.dateToDisplay.format('YYYY-MM-DD');
             if (department.properties && department.properties.nom && department.properties.metrics) {
                 let content = `<h6>${department.properties.nom} (${department.properties.code})</h6>\
                 <table class="table table-borderless table-hover">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Cumul</th>
+                            <th scope="col">Nb 2e dose</th>
                             <th scope="col">Taux</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row">0-24 ans</th>
-                            <td>${department.properties.metrics[date][24].n_dose1}</td>
-                            <td>${department.properties.metrics[date][24].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][24].taux} %</td>
+                            <td>${department.properties.metrics[24].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[24].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">25-29 ans</th>
-                            <td>${department.properties.metrics[date][29].n_dose1}</td>
-                            <td>${department.properties.metrics[date][29].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][29].taux} %</td>
+                            <td>${department.properties.metrics[29].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[29].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">30-39 ans</th>
-                            <td>${department.properties.metrics[date][39].n_dose1}</td>
-                            <td>${department.properties.metrics[date][39].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][39].taux} %</td>
+                            <td>${department.properties.metrics[39].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[39].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">40-49 ans</th>
-                            <td>${department.properties.metrics[date][49].n_dose1}</td>
-                            <td>${department.properties.metrics[date][49].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][49].taux} %</td>
+                            <td>${department.properties.metrics[49].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[49].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">50-59 ans</th>
-                            <td>${department.properties.metrics[date][59].n_dose1}</td>
-                            <td>${department.properties.metrics[date][59].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][59].taux} %</td>
+                            <td>${department.properties.metrics[59].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[59].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">60-64 ans</th>
-                            <td>${department.properties.metrics[date][64].n_dose1}</td>
-                            <td>${department.properties.metrics[date][64].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][64].taux} %</td>
+                            <td>${department.properties.metrics[64].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[64].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">65-69 ans</th>
-                            <td>${department.properties.metrics[date][69].n_dose1}</td>
-                            <td>${department.properties.metrics[date][69].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][69].taux} %</td>
+                            <td>${department.properties.metrics[69].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[69].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">70-74 ans</th>
-                            <td>${department.properties.metrics[date][74].n_dose1}</td>
-                            <td>${department.properties.metrics[date][74].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][74].taux} %</td>
+                            <td>${department.properties.metrics[74].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[74].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">75-79 ans</th>
-                            <td>${department.properties.metrics[date][79].n_dose1}</td>
-                            <td>${department.properties.metrics[date][79].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][79].taux} %</td>
+                            <td>${department.properties.metrics[79].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[79].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">80 ans et +</th>
-                            <td>${department.properties.metrics[date][80].n_dose1}</td>
-                            <td>${department.properties.metrics[date][80].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][80].taux} %</td>
+                            <td>${department.properties.metrics[80].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[80].taux} %</td>
                         </tr>
                         <tr>
                             <th scope="row">Total</th>
-                            <td>${department.properties.metrics[date][0].n_dose1}</td>
-                            <td>${department.properties.metrics[date][0].n_cum_dose1}</td>
-                            <td>${department.properties.metrics[date][0].taux} %</td>
+                            <td>${department.properties.metrics[0].n_tot_dose2}</td>
+                            <td>${department.properties.metrics[0].taux} %</td>
                         </tr>
                     </tbody>
                 </table>`;
@@ -188,9 +171,8 @@ app.component('fr-map', {
         *   Defines the style properties of a department.
         */
         setStyle(department) {
-            let date = this.dateToDisplay.format("YYYY-MM-DD");
             return {
-                fillColor: this.vaxiColor(department.properties.metrics[date][0].taux),
+                fillColor: this.vaxiColor(department.properties.metrics[0].taux),
                 weight: 1,
                 color: 'white',
                 fillOpacity: 1
@@ -200,7 +182,7 @@ app.component('fr-map', {
         *   Selects the metrics of a specific department
         */
         zoomToFeature(event) {
-            this.$emit('zoom-dept', this.dateToDisplay.format('YYYY-MM-DD'), event.target.feature.properties.code);
+            this.$emit('zoom-dept', event.target.feature.properties.code);
         }
     }
 })

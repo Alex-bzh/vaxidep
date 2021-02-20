@@ -5,7 +5,7 @@
 from Direction Générale de la Santé in CSV format to a geoJSON object.
 The source data are available here:
 https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19-1/
-Correct dataset: vacsi-a-dep*.csv
+Correct dataset: vacsi-tot-a-dep*.csv
 """
 
 #
@@ -18,22 +18,18 @@ import datetime
 #
 #   User functions
 #
-def build_structure(departments, dates, ages):
+def build_structure(departments, ages):
     """Builds the skeleton of the data."""
     accounts = dict()
     
     for department in departments:
         accounts.update({
             department: {
-                date: {
-                    age: {
-                        "n_dose1": int(),
-                        "n_cum_dose1": int(),
-                        "taux": float()
-                    }
-                    for age in ages
+                age: {
+                    "n_tot_dose2": int(),
+                    "taux": float()
                 }
-                for date in dates
+                for age in ages
             }
         })
 
@@ -41,13 +37,13 @@ def build_structure(departments, dates, ages):
 
 def get_borders():
     """Loads the borders of the French departments."""
-    with open('../data/departements.geojson') as geojson:
+    with open('./departements.geojson') as geojson:
         return json.load(geojson)
 
 def get_census():
     """Distribution of the French census by department and age group."""
     census = dict()
-    with open('../data/pop-vax.csv', newline='') as csvfile:
+    with open('./pop-vax.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         for line in reader:
             census.update({ line['dep']: line })
@@ -61,18 +57,15 @@ def fill_data(path, accounts, census):
         for idx, line in enumerate(reader):
             if idx != 0:
                 if line['dep'] not in ['970', '97', '977', '00']:
-                    accounts[line['dep']][line['jour']][line['clage_vacsi']]['n_dose1'] = int(line['n_dose1'])
-                    accounts[line['dep']][line['jour']][line['clage_vacsi']]['n_cum_dose1'] = int(line['n_cum_dose1'])
-                    accounts[line['dep']][line['jour']][line['clage_vacsi']]['taux'] = f'{(int(line["n_cum_dose1"]) / int(census[line["dep"]][line["clage_vacsi"]])) * 100:.2f}'
+                    accounts[line['dep']][line['clage_vacsi']]['n_tot_dose2'] = int(line['n_tot_dose2'])
+                    accounts[line['dep']][line['clage_vacsi']]['taux'] = round((int(line['n_tot_dose2']) / int(census[line['dep']][line['clage_vacsi']])) * 100, 2)
 
-                    accounts['france'][line['jour']][line['clage_vacsi']]['n_dose1'] += int(line['n_dose1'])
-                    accounts['france'][line['jour']][line['clage_vacsi']]['n_cum_dose1'] += int(line['n_cum_dose1'])
-                    accounts['france'][line['jour']][line['clage_vacsi']]['taux'] += (int(line['n_cum_dose1']) / int(census['france'][line['clage_vacsi']])) * 100
-    
+                    accounts['france'][line['clage_vacsi']]['n_tot_dose2'] += int(line['n_tot_dose2'])
+                    accounts['france'][line['clage_vacsi']]['taux'] += (int(line['n_tot_dose2']) / int(census['france'][line['clage_vacsi']])) * 100
+
     # Sorts the metrics by date
     for dept in accounts:
         accounts[dept] = dict(sorted(accounts[dept].items(), key=lambda item: item[0]))
-
 
     return accounts
 
@@ -95,11 +88,10 @@ def main():
     today = f'{date.year}-{date.month}-{date.day}'
 
     # Paths to the files
-    path_to_vacsi = '../data/vacsi-a-dep.csv'
+    path_to_vacsi = './vacsi-tot-a-dep.csv'
     path_to_geo_full = '../data/vaxi-france.json'
 
     # Useful structures to analyse the data
-    dates = set()
     departments = set({"france"})
     ages = set()
 
@@ -107,7 +99,6 @@ def main():
         reader = csv.DictReader(csvfile, delimiter=',')
         for line in reader:
             if line['dep'] != '97':
-                dates.add(line['jour'])
                 departments.add(line['dep'])
                 ages.add(line['clage_vacsi'])
 
@@ -118,7 +109,7 @@ def main():
     borders = get_borders()
 
     # Empty structure
-    accounts = build_structure(departments, dates, ages)
+    accounts = build_structure(departments, ages)
 
     # Fill the structure
     accounts = fill_data(path_to_vacsi, accounts, census)
@@ -129,10 +120,7 @@ def main():
     # Writes a geoJSON file
     with open(path_to_geo_full, 'w') as jsonfile:
 
-        # The most recent recorded date
-        recent = max(dates)
-
-        jsonfile.write('{"date":"' + recent + '", "type":"FeatureCollection","features":[')
+        jsonfile.write('{"type":"FeatureCollection","features":[')
         
         for idx, department in enumerate(borders['features']):
 
