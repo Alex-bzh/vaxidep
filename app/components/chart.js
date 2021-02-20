@@ -1,9 +1,12 @@
 // chart.js
 app.component('chart', {
     template: `
-        <div>
-            <canvas id="chart" height="300"></canvas>
-        </div>`,
+    <button class="btn btn-secondary" type="button"
+        @click="setZoneToFrance">
+        France entière
+    </button>
+    <canvas id="chart" height="300"></canvas>
+    `,
     data() {
         return {
             labels: Array(),
@@ -115,7 +118,16 @@ app.component('chart', {
                 'taux': Array()
             };
             // Replaces the canvas with a fresh one.
-            $('#chart').replaceWith('<canvas id="chart" height="300" class="mt-3"></canvas>');
+            $('#chart').replaceWith('<canvas id="chart" height="300"></canvas>');
+        },
+        /*
+        *   Displays the nationwide metrics 
+        */
+        setZoneToFrance() {
+            // Removes the actual chart
+            this.removeChart();
+            // Gets the nationwide metrics
+            this.getMetrics('france');
         }
     }
 })
