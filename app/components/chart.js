@@ -54,12 +54,26 @@ app.component('chart', {
         initChart() {
             // A new array to save the data with only two decimal.
             let taux2decimal = Array();
-            this.data.taux.forEach( element => taux2decimal.push(element.toFixed(2)));
+            this.data.taux.forEach(
+                element => taux2decimal.push(element.toFixed(2))
+                );
             var datasets = [
                 {
                     label: 'Taux (en %)',
                     borderColor: 'hsl(180, 100%, 25%)',
-                    backgroundColor: 'hsl(180, 100%, 25%)',
+                    backgroundColor: [
+                        'hsl(180, 100%, 25%)',
+                        'hsl(180, 100%, 65%)',
+                        'hsl(180, 100%, 60%)',
+                        'hsl(180, 100%, 55%)',
+                        'hsl(180, 100%, 50%)',
+                        'hsl(180, 100%, 45%)',
+                        'hsl(180, 100%, 40%)',
+                        'hsl(180, 100%, 35%)',
+                        'hsl(180, 100%, 30%)',
+                        'hsl(180, 100%, 25%)',
+                        'hsl(180, 100%, 20%)'
+                    ],
                     data: taux2decimal
                 }
             ];
@@ -73,7 +87,9 @@ app.component('chart', {
             };
             // Data
             let data = {
-                labels: ['Tout', '0-24', '25-29', '30-39', '40-49', '50-59', '60-64', '65-69', '70-74', '75-79', '+80'],
+                labels: ['Tous âges', '0-24 ans', '25-29 ans', '30-39 ans',
+                    '40-49 ans','50-59 ans', '60-64 ans', '65-69 ans',
+                    '70-74 ans', '75-79 ans', '80 ans et +'],
                 datasets: datasets
             }
             let ctx = document.getElementById('chart').getContext('2d');
@@ -89,6 +105,17 @@ app.component('chart', {
                     scales: scales
                 }
             });
+        },
+        /*
+        *   Removes an obsolete chart
+        */
+        removeChart() {
+            // Restores data to default value
+            this.data = {
+                'taux': Array()
+            };
+            // Replaces the canvas with a fresh one.
+            $('#chart').replaceWith('<canvas id="chart" height="300" class="mt-3"></canvas>');
         }
     }
 })

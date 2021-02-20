@@ -32,9 +32,9 @@ const app = Vue.createApp({
             // The zone is fixed to the department
             this.zone = dept;
             // Removes the old chart.
-            //this.$refs.chart.removeChart();
+            this.$refs.chart.removeChart();
             // Sets a new Chart with accurate metrics.
-            //this.$refs.chart.getMetrics(dept, limit);
+            this.$refs.chart.getMetrics(dept);
         }
     }
 });
