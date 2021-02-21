@@ -24,7 +24,7 @@ app.component('chart', {
         /*
         *   Adds metrics to data for a point in time.
         */
-        addMetrics(metrics, age) {
+        addMetrics(metrics) {
             this.data.taux.push(metrics.taux);
         },
         /*
@@ -45,7 +45,7 @@ app.component('chart', {
             .then(metrics => {
                 this.labels = Object.keys(metrics);
                 for (var age in this.labels) {
-                    this.addMetrics(metrics[this.labels[age]], this.labels[age]);
+                    this.addMetrics(metrics[this.labels[age]]);
                 }
                 // Initializes the chart
                 this.initChart();
