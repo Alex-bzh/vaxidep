@@ -11,7 +11,8 @@ app.component('chart', {
         return {
             labels: Array(),
             data: {
-                'taux': Array()
+                'rate_dose1': Array(),
+                'rate_dose2': Array()
             },
             title: '',
             zone: 'france'
@@ -21,12 +22,6 @@ app.component('chart', {
         this.getMetrics(this.zone);
     },
     methods: {
-        /*
-        *   Adds metrics to data for a point in time.
-        */
-        addMetrics(metrics) {
-            this.data.taux.push(metrics.taux);
-        },
         /*
         *   Fetches the metrics, according to a point in time (eventually).
         */
@@ -45,7 +40,8 @@ app.component('chart', {
             .then(metrics => {
                 this.labels = Object.keys(metrics);
                 for (var age in this.labels) {
-                    this.addMetrics(metrics[this.labels[age]]);
+                    this.data.rate_dose1.push(metrics[this.labels[age]]['rate_dose1'])
+                    this.data.rate_dose2.push(metrics[this.labels[age]]['rate_dose2'])
                 }
                 // Initializes the chart
                 this.initChart();
@@ -56,16 +52,19 @@ app.component('chart', {
         */
         initChart() {
             // A new array to save the data with only two decimal.
-            let taux2decimal = Array();
-            this.data.taux.forEach(
-                element => taux2decimal.push(element.toFixed(2))
+            let rate_dose1_decimal = Array();
+            let rate_dose2_decimal = Array();
+            this.data.rate_dose1.forEach(
+                element => rate_dose1_decimal.push(element.toFixed(2))
+                );
+            this.data.rate_dose2.forEach(
+                element => rate_dose2_decimal.push(element.toFixed(2))
                 );
             var datasets = [
                 {
-                    label: 'Taux (en %)',
-                    borderColor: 'hsl(180, 100%, 25%)',
+                    label: 'Taux 1 injection (en %)',
                     backgroundColor: [
-                        'hsl(180, 100%, 25%)',
+                        'hsl(180, 100%, 45%)',
                         'hsl(180, 100%, 65%)',
                         'hsl(180, 100%, 60%)',
                         'hsl(180, 100%, 55%)',
@@ -77,7 +76,24 @@ app.component('chart', {
                         'hsl(180, 100%, 25%)',
                         'hsl(180, 100%, 20%)'
                     ],
-                    data: taux2decimal
+                    data: rate_dose1_decimal
+                },
+                {
+                    label: 'Taux 2 injections (en %)',
+                    backgroundColor: [
+                        'hsl(21, 86%, 33%)',
+                        'hsl(21, 86%, 75%)',
+                        'hsl(21, 86%, 70%)',
+                        'hsl(21, 86%, 65%)',
+                        'hsl(21, 86%, 60%)',
+                        'hsl(21, 86%, 55%)',
+                        'hsl(21, 86%, 50%)',
+                        'hsl(21, 86%, 45%)',
+                        'hsl(21, 86%, 40%)',
+                        'hsl(21, 86%, 33%)',
+                        'hsl(21, 86%, 27%)'
+                    ],
+                    data: rate_dose2_decimal
                 }
             ];
             var scales = {
@@ -115,7 +131,8 @@ app.component('chart', {
         removeChart() {
             // Restores data to default value
             this.data = {
-                'taux': Array()
+                'rate_dose1': Array(),
+                'rate_dose2': Array()
             };
             // Replaces the canvas with a fresh one.
             $('#chart').replaceWith('<canvas id="chart" height="300"></canvas>');
