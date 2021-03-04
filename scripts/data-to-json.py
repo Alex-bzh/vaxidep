@@ -58,7 +58,7 @@ def fill_data(path, accounts, census):
         reader = csv.DictReader(csvfile, delimiter=',')
         for idx, line in enumerate(reader):
             if idx != 0:
-                if line['dep'] not in ['970', '97', '977', '00']:
+                if line['dep'] not in ['970', '97', '977', '978', '00']:
                     accounts[line['dep']][line['clage_vacsi']]['n_tot_dose1'] = int(line['n_tot_dose1'])
                     accounts[line['dep']][line['clage_vacsi']]['n_tot_dose2'] = int(line['n_tot_dose2'])
                     accounts[line['dep']][line['clage_vacsi']]['rate_dose1'] = round((int(line['n_tot_dose1']) / int(census[line['dep']][line['clage_vacsi']])) * 100, 2)
