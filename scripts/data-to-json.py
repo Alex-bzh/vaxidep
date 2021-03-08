@@ -55,7 +55,7 @@ def get_census():
 def fill_data(path, accounts, census):
     """Fill the structure with the data"""
     with open(path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=',')
+        reader = csv.DictReader(csvfile, delimiter=';')
         for idx, line in enumerate(reader):
             if idx != 0:
                 if line['dep'] not in ['970', '97', '977', '978', '00']:
@@ -102,7 +102,7 @@ def main():
     ages = set()
 
     with open(path_to_vacsi, newline='') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=',')
+        reader = csv.DictReader(csvfile, delimiter=';')
         for line in reader:
             if line['dep'] != '97':
                 departments.add(line['dep'])
