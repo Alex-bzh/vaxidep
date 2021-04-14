@@ -22,7 +22,7 @@ Then, open your web browser and navigate to the URL `http://localhost:8080`.
 
 SPF (Santé publique France) provide updated data day by day through its [système d’information Vaccin Covid (VAC-SI)](https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19-1/).
 
-1. download the CSV file called `vacsi-tot-a-dep.csv`
+1. download the CSV files called `vacsi-tot-a-dep.csv` and `vacsi-tot-a-fra.csv`
 2. save it in the `script` folder
 3. run the script `data_to_JSON.py`
 ```shell
@@ -36,5 +36,3 @@ This procedure will update the files in the `data` folder on which the applicati
 The borders of the departments come from the <a href="https://github.com/gregoiredavid/france-geojson">France GeoJSON</a> project by Grégoire David.
 
 All the data are extracted from the Covid vaccine information system (*VAC-SI*) and provided by <a href="https://www.data.gouv.fr/fr/organizations/sante-publique-france/">Santé publique France</a>.
-
-The data on the census of the population comes from the <a href="https://www.scoresante.org/">Score-santé information system</a>.
