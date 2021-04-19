@@ -31,7 +31,7 @@ app.component('chart', {
             this.zone = zone;
 
             // Fix the title of the chart
-            if (this.zone != 'france') this.title = "Taux de vaccination par classe d’âge des personnes ayant reçu deux doses de vaccin – Département " + this.zone;
+            if (this.zone != 'france') this.title = "Taux de vaccination par classe d’âge des personnes vaccinées – Département " + this.zone;
             else this.title = "Taux de vaccination par classe d’âge des personnes vaccinées – France entière";
 
             // Fetch API
