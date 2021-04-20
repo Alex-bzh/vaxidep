@@ -24,11 +24,9 @@
       <div class="row">
         <div class="col-lg-4">
           <h1>La vaccination en France</h1>
-          <h2>{{ dateToDisplay }}</h2>
             <!-- Geographical area -->
-            <geo-area :area="area" @set-area=setArea></geo-area>
+            <geo-area :area="area" @set-area="setArea"></geo-area>
             <!-- Nb vaccinated people -->
-            <!--<nb-vax></nb-vax>-->
             <!-- Metrics -->
             <chart class="mt-3" ref="chart"></chart>
         </div>

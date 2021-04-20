@@ -9,29 +9,19 @@ app.component('fr-map', {
     },
     mounted: function() {
         this.initMap();
+        this.fetchData();
     },
     methods: {
         /*
-        *   Sets a color according to the value of a stat
+        *   Fetches the data
         */
-        vaxiColor(n) {
-            return  n >= 100 ? 'hsl(139, 100%, 17%)':
-                    n > 75 ? 'hsl(139, 100%, 27%)':
-                    n > 60 ? 'hsl(139, 100%, 32%)':
-                    n > 50 ? 'hsl(139, 100%, 37%)':
-                    n > 45 ? 'hsl(139, 100%, 42%)':
-                    n > 40 ? 'hsl(139, 100%, 47%)':
-                    n > 35 ? 'hsl(139, 100%, 52%)':
-                    n > 30 ? 'hsl(139, 100%, 57%)':
-                    n > 25 ? 'hsl(139, 100%, 62%)':
-                    n > 20 ? 'hsl(139, 100%, 67%)':
-                    n > 15 ? 'hsl(139, 100%, 72%)':
-                    n > 10 ? 'hsl(139, 100%, 77%)':
-                    n > 5 ? 'hsl(139, 100%, 87%)':
-                    n > 3 ? 'hsl(139, 100%, 92%)':
-                    n > 2 ? 'hsl(139, 100%, 95%)':
-                    n > 1 ? 'hsl(139, 100%, 97%)':
-                            'hsl(139, 100%, 99%)';
+        fetchData() {
+            fetch('./data/vaxi-france.json')
+            .then(stream => stream.json())
+            .then(data => {
+                // Initializes the GeoJSON layer
+                this.initGeoJSON(data.features);
+            });
         },
         /*
         *   Highlights a department
@@ -72,8 +62,6 @@ app.component('fr-map', {
                 attribution: 'Données géographiques © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributeurs, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
                 maxZoom: 18
             }).addTo(this.map);
-
-            this.initGeoJSON();
         },
         /*
         *   Defines all the actions to set on a department
@@ -179,6 +167,28 @@ app.component('fr-map', {
                 color: 'white',
                 fillOpacity: 1
             };
+        },
+        /*
+        *   Sets a color according to the value of a stat
+        */
+        vaxiColor(n) {
+            return  n >= 100 ? 'hsl(139, 100%, 17%)':
+                    n > 75 ? 'hsl(139, 100%, 27%)':
+                    n > 60 ? 'hsl(139, 100%, 32%)':
+                    n > 50 ? 'hsl(139, 100%, 37%)':
+                    n > 45 ? 'hsl(139, 100%, 42%)':
+                    n > 40 ? 'hsl(139, 100%, 47%)':
+                    n > 35 ? 'hsl(139, 100%, 52%)':
+                    n > 30 ? 'hsl(139, 100%, 57%)':
+                    n > 25 ? 'hsl(139, 100%, 62%)':
+                    n > 20 ? 'hsl(139, 100%, 67%)':
+                    n > 15 ? 'hsl(139, 100%, 72%)':
+                    n > 10 ? 'hsl(139, 100%, 77%)':
+                    n > 5 ? 'hsl(139, 100%, 87%)':
+                    n > 3 ? 'hsl(139, 100%, 92%)':
+                    n > 2 ? 'hsl(139, 100%, 95%)':
+                    n > 1 ? 'hsl(139, 100%, 97%)':
+                            'hsl(139, 100%, 99%)';
         },
         /*
         *   Selects the metrics of a specific department
