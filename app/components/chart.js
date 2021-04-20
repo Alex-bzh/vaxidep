@@ -2,25 +2,26 @@
 app.component('chart', {
     template: `
     <button class="btn btn-secondary" type="button"
-        @click="setZoneToFrance">
+        @click="setZoneToFrance"
+        :disabled="zone == 'france'">
         France entière
     </button>
     <table class="table table-borderless table-sm">
         <caption class="caption-top">Zone géographique : {{ zoneToDisplay }}</caption>
         <thead>
             <tr>
-                <th scope="col">Nombre de doses</th>
+                <th scope="col">Nombre d’injections</th>
                 <th scope="col">Nombre de personnes vaccinées</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>{{ Number(data.n_tot_dose1[0]).toLocaleString() }}</td>
+                <td>{{ Number(data.n_tot_dose1[0]).toLocaleString() }} ({{ data.rate_dose1[0] }} %)</td>
             </tr>
             <tr>
                 <th scope="row">2</th>
-                <td>{{ Number(data.n_tot_dose2[0]).toLocaleString() }}</td>
+                <td>{{ Number(data.n_tot_dose2[0]).toLocaleString() }} ({{ data.rate_dose1[1] }} %)</td>
             </tr>
         </tbody>
     </table>
@@ -35,7 +36,7 @@ app.component('chart', {
                 'rate_dose1': Array(),
                 'rate_dose2': Array()
             },
-            title: '',
+            title: 'Taux de vaccination par classe d’âge des personnes vaccinées',
             zone: 'france'
         }
     },
@@ -161,10 +162,6 @@ app.component('chart', {
 
             // Defines the zone to display
             this.zone = zone;
-
-            // Fix the title of the chart
-            if (this.zone != 'france') this.title = `Taux de vaccination par classe d’âge des personnes vaccinées – ${this.zoneToDisplay}`;
-            else this.title = "Taux de vaccination par classe d’âge des personnes vaccinées – France entière";
 
             // Fetch API
             fetch('./data/metrics-' + this.zone + '.json')
