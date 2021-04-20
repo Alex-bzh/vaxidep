@@ -1,13 +1,8 @@
 // chart.js
 app.component('chart', {
     template: `
-    <button class="btn btn-secondary" type="button"
-        @click="setZoneToFrance"
-        :disabled="zone == 'france'">
-        France entière
-    </button>
     <table class="table table-borderless table-sm">
-        <caption class="caption-top">Zone géographique : {{ zoneToDisplay }}</caption>
+        <caption class="caption-top">Zone géographique : {{ areaToDisplay }}</caption>
         <thead>
             <tr>
                 <th scope="col">Nombre d’injections</th>
@@ -37,15 +32,15 @@ app.component('chart', {
                 'rate_dose2': Array()
             },
             title: 'Taux de vaccination par classe d’âge des personnes vaccinées',
-            zone: 'france'
+            area: 'france'
         }
     },
     created() {
-        this.getMetrics(this.zone);
+        this.getMetrics(this.area);
     },
     computed: {
-        zoneToDisplay() {
-            let zones = {
+        areaToDisplay() {
+            let areas = {
                 'france': 'France',
                 '01':'Ain',
                 '02':'Aisne',
@@ -151,20 +146,20 @@ app.component('chart', {
                 '987':'Polynésie Française',
                 '988':'Nouvelle Calédonie'
             }
-            return zones[this.zone];
+            return areas[this.area];
         }
     },
     methods: {
         /*
         *   Fetches the metrics, according to a point in time (eventually).
         */
-        getMetrics(zone) {
+        getMetrics(area) {
 
             // Defines the zone to display
-            this.zone = zone;
+            this.area = area;
 
             // Fetch API
-            fetch('./data/metrics-' + this.zone + '.json')
+            fetch('./data/metrics-' + this.area + '.json')
             .then(stream => stream.json())
             .then(metrics => {
                 this.labels = Object.keys(metrics);
@@ -278,15 +273,6 @@ app.component('chart', {
             };
             // Replaces the canvas with a fresh one.
             $('#chart').replaceWith('<canvas id="chart" height="300"></canvas>');
-        },
-        /*
-        *   Displays the nationwide metrics 
-        */
-        setZoneToFrance() {
-            // Removes the actual chart
-            this.removeChart();
-            // Gets the nationwide metrics
-            this.getMetrics('france');
         }
     }
 })

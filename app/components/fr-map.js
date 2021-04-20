@@ -184,7 +184,7 @@ app.component('fr-map', {
         *   Selects the metrics of a specific department
         */
         zoomToFeature(event) {
-            this.$emit('zoom-dept', event.target.feature.properties.code);
+            this.$emit('set-area', event.target.feature.properties.code);
         }
     }
 })

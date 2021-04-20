@@ -3,7 +3,7 @@ const app = Vue.createApp({
         return {
             departments: null,
             dateToDisplay: moment().format('LL'),
-            zone: 'france'
+            area: 'france'
         }
     },
     mounted() {
@@ -28,13 +28,13 @@ const app = Vue.createApp({
         /*
         *   Zoom to a specific department
         */
-        zoomDept(dept) {
+        setArea(area) {
             // The zone is fixed to the department
-            this.zone = dept;
+            this.area = area;
             // Removes the old chart.
             this.$refs.chart.removeChart();
             // Sets a new Chart with accurate metrics.
-            this.$refs.chart.getMetrics(dept);
+            this.$refs.chart.getMetrics(this.area);
         }
     }
 });
