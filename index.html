@@ -27,6 +27,13 @@
             <!-- Geographical area -->
             <geo-area :area="area" @set-area="setArea"></geo-area>
             <!-- Nb vaccinated people -->
+            <nb-vax
+                :metrics="{
+                    n_tot_dose1: Number(metrics.n_tot_dose1[0]),
+                    n_tot_dose2: Number(metrics.n_tot_dose2[0]),
+                    rate_dose1: metrics.rate_dose1[0],
+                    rate_dose2: metrics.rate_dose2[0]
+                }"></nb-vax>
             <!-- Metrics -->
             <chart ref="chart"></chart>
         </div>
@@ -63,6 +70,7 @@
     <script src="./app/components/chart.js"></script>
     <script src="./app/components/fr-map.js"></script>
     <script src="./app/components/geo-area.js"></script>
+    <script src="./app/components/nb-vax.js"></script>
 
     <!-- Mount the app -->
     <script>
