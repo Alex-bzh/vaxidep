@@ -1,26 +1,6 @@
 // chart.js
 app.component('chart', {
-    template: `
-    <table class="table table-borderless table-sm">
-        <thead>
-            <tr>
-                <th scope="col">Nombre d’injections</th>
-                <th scope="col">Nombre de personnes vaccinées</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>{{ Number(data.n_tot_dose1[0]).toLocaleString() }} ({{ data.rate_dose1[0] }} %)</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>{{ Number(data.n_tot_dose2[0]).toLocaleString() }} ({{ data.rate_dose2[0] }} %)</td>
-            </tr>
-        </tbody>
-    </table>
-    <canvas id="chart" height="300"></canvas>
-    `,
+    template: `<canvas id="chart" height="300"></canvas>`,
     data() {
         return {
             labels: Array(),
