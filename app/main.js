@@ -14,6 +14,10 @@ const app = Vue.createApp({
         // Fetches the default metrics (i.e. France)
         this.getMetrics(this.area);
     },
+    updated() {
+        // 
+        this.$refs.chart.initChart();
+    },
     methods: {
         /*
         *   Flushes the metrics.
@@ -57,10 +61,6 @@ const app = Vue.createApp({
             this.flushMetrics();
             // … and we get new ones.
             this.getMetrics(this.area);
-            // Removes the old chart.
-            this.$refs.chart.removeChart();
-            // Sets a new Chart with accurate metrics.
-            this.$refs.chart.getMetrics(this.area);
         }
     }
 });
