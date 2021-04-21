@@ -11,7 +11,7 @@ app.component('geo-area', {
     props: {
         area: String,
     },
-    emits: ['setArea'],
+    emits: ['set-area'],
     data() {
         return {
             dateToDisplay: moment().format('LL')
