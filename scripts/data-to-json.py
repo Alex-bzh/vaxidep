@@ -48,7 +48,9 @@ def fill_data(path_dep, path_fra, accounts):
         reader = csv.DictReader(csvfile, delimiter=';')
         for idx, line in enumerate(reader):
             if idx != 0:
-                if line['dep'] not in ['970', '97', '977', '978', '00', '99', '750']:
+                if line['dep'] not in [
+                        '970', '97', '977', '978', '00', '99', '750'
+                    ] and line['couv_tot_dose1']:
                     accounts[line['dep']][line['clage_vacsi']]['n_tot_dose1'] = int(line['n_tot_dose1'])
                     accounts[line['dep']][line['clage_vacsi']]['n_tot_dose2'] = int(line['n_tot_dose2'])
                     accounts[line['dep']][line['clage_vacsi']]['rate_dose1'] = float(line['couv_tot_dose1'])
