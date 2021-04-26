@@ -49,12 +49,13 @@ def fill_data(path_dep, path_fra, accounts):
         for idx, line in enumerate(reader):
             if idx != 0:
                 if line['dep'] not in [
-                        '970', '97', '977', '978', '00', '99', '750'
+                        '970', '97', '977', '978', '0', '00', '99', '750'
                     ] and line['couv_tot_dose1']:
-                    accounts[line['dep']][line['clage_vacsi']]['n_tot_dose1'] = int(line['n_tot_dose1'])
-                    accounts[line['dep']][line['clage_vacsi']]['n_tot_dose2'] = int(line['n_tot_dose2'])
-                    accounts[line['dep']][line['clage_vacsi']]['rate_dose1'] = float(line['couv_tot_dose1'])
-                    accounts[line['dep']][line['clage_vacsi']]['rate_dose2'] = float(line['couv_tot_dose2'])
+                    code = format_code_dep(line['dep'])
+                    accounts[code][line['clage_vacsi']]['n_tot_dose1'] = int(line['n_tot_dose1'])
+                    accounts[code][line['clage_vacsi']]['n_tot_dose2'] = int(line['n_tot_dose2'])
+                    accounts[code][line['clage_vacsi']]['rate_dose1'] = float(line['couv_tot_dose1'])
+                    accounts[code][line['clage_vacsi']]['rate_dose2'] = float(line['couv_tot_dose2'])
     with open(path_fra, newline='') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         for line in reader:
@@ -68,6 +69,11 @@ def fill_data(path_dep, path_fra, accounts):
         accounts[dept] = dict(sorted(accounts[dept].items(), key=lambda item: item[0]))
 
     return accounts
+
+def format_code_dep(code):
+    """As the department number is not always filled in
+    the same way in the data, returns the two digit code."""
+    return f"0{code}" if len(code) == 1 else code
 
 def write_metrics(accounts):
     """ Writes the nationwide metrics and the specific ones to a
@@ -100,7 +106,7 @@ def main():
         reader = csv.DictReader(csvfile, delimiter=';')
         for line in reader:
             if line['dep'] != '97':
-                departments.add(line['dep'])
+                departments.add(format_code_dep(line['dep']))
                 ages.add(line['clage_vacsi'])
 
     # Borders of the French departments
