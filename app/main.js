@@ -4,9 +4,9 @@ const app = Vue.createApp({
             area: 'france',
             metrics: {
                 'n_tot_dose1': Array(),
-                'n_tot_dose2': Array(),
+                'n_tot_complet': Array(),
                 'rate_dose1': Array(),
-                'rate_dose2': Array()
+                'rate_complet': Array()
             }
         }
     },
@@ -25,9 +25,9 @@ const app = Vue.createApp({
         flushMetrics() {
             this.metrics = {
                 'n_tot_dose1': Array(),
-                'n_tot_dose2': Array(),
+                'n_tot_complet': Array(),
                 'rate_dose1': Array(),
-                'rate_dose2': Array()
+                'rate_complet': Array()
             }
         },
         /*
@@ -45,9 +45,9 @@ const app = Vue.createApp({
                 this.labels = Object.keys(metrics);
                 for (var age in this.labels) {
                     this.metrics.n_tot_dose1.push(metrics[this.labels[age]]['n_tot_dose1'])
-                    this.metrics.n_tot_dose2.push(metrics[this.labels[age]]['n_tot_dose2'])
+                    this.metrics.n_tot_complet.push(metrics[this.labels[age]]['n_tot_complet'])
                     this.metrics.rate_dose1.push(metrics[this.labels[age]]['rate_dose1'])
-                    this.metrics.rate_dose2.push(metrics[this.labels[age]]['rate_dose2'])
+                    this.metrics.rate_complet.push(metrics[this.labels[age]]['rate_complet'])
                 }
             });
         },

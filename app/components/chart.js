@@ -18,12 +18,12 @@ app.component('chart', {
         initChart() {
             // A new array to save the data with only two decimal.
             let rate_dose1_decimal = Array();
-            let rate_dose2_decimal = Array();
+            let rate_complet_decimal = Array();
             this.metrics.rate_dose1.forEach(
                 element => rate_dose1_decimal.push(element.toFixed(2))
                 );
-            this.metrics.rate_dose2.forEach(
-                element => rate_dose2_decimal.push(element.toFixed(2))
+            this.metrics.rate_complet.forEach(
+                element => rate_complet_decimal.push(element.toFixed(2))
                 );
             var datasets = [
                 {
@@ -44,7 +44,7 @@ app.component('chart', {
                     data: rate_dose1_decimal
                 },
                 {
-                    label: 'Taux 2 injections (en %)',
+                    label: 'Taux vaccinés (en %)',
                     backgroundColor: [
                         'hsl(21, 86%, 33%)',
                         'hsl(21, 86%, 75%)',
@@ -58,7 +58,7 @@ app.component('chart', {
                         'hsl(21, 86%, 33%)',
                         'hsl(21, 86%, 27%)'
                     ],
-                    data: rate_dose2_decimal
+                    data: rate_complet_decimal
                 }
             ];
             var scales = {
@@ -91,8 +91,8 @@ app.component('chart', {
                     tooltips: {
                         callbacks: {
                             beforeBody: function(tooltipItem, chart) {
-                                let idx = tooltipItem[0].datasetIndex + 1;
-                                return 'Nb vaccinés : ' + d[`n_tot_dose${idx}`][tooltipItem[0].index].toLocaleString();
+                                let field = tooltipItem[0].datasetIndex == 0 ? 'n_tot_dose1' : 'n_tot_complet'
+                                return 'Nb vaccinés : ' + d[field][tooltipItem[0].index].toLocaleString();
                             }
                         }
                     }

@@ -15,7 +15,7 @@ app.component('nb-vax', {
             </tr>
             <tr>
                 <th scope="row">2</th>
-                <td>{{ metrics.n_tot_dose2.toLocaleString() }} ({{ metrics.rate_dose2 }} %)</td>
+                <td>{{ metrics.n_tot_complet.toLocaleString() }} ({{ metrics.rate_complet }} %)</td>
             </tr>
         </tbody>
     </table>
