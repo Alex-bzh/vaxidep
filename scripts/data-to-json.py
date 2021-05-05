@@ -27,9 +27,9 @@ def build_structure(departments, ages):
             department: {
                 age: {
                     "n_tot_dose1": int(),
-                    "n_tot_dose2": int(),
+                    "n_tot_complet": int(),
                     "rate_dose1": float(),
-                    "rate_dose2": float(),
+                    "rate_complet": float(),
                 }
                 for age in ages
             }
@@ -53,16 +53,16 @@ def fill_data(path_dep, path_fra, accounts):
                     ] and line['couv_tot_dose1']:
                     code = format_code_dep(line['dep'])
                     accounts[code][line['clage_vacsi']]['n_tot_dose1'] = int(line['n_tot_dose1'])
-                    accounts[code][line['clage_vacsi']]['n_tot_dose2'] = int(line['n_tot_dose2'])
+                    accounts[code][line['clage_vacsi']]['n_tot_complet'] = int(line['n_tot_complet'])
                     accounts[code][line['clage_vacsi']]['rate_dose1'] = float(line['couv_tot_dose1'])
-                    accounts[code][line['clage_vacsi']]['rate_dose2'] = float(line['couv_tot_dose2'])
+                    accounts[code][line['clage_vacsi']]['rate_complet'] = float(line['couv_tot_complet'])
     with open(path_fra, newline='') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         for line in reader:
             accounts['france'][line['clage_vacsi']]['n_tot_dose1'] = int(line['n_tot_dose1'])
-            accounts['france'][line['clage_vacsi']]['n_tot_dose2'] = int(line['n_tot_dose2'])
+            accounts['france'][line['clage_vacsi']]['n_tot_complet'] = int(line['n_tot_complet'])
             accounts['france'][line['clage_vacsi']]['rate_dose1'] = float(line['couv_tot_dose1'])
-            accounts['france'][line['clage_vacsi']]['rate_dose2'] = float(line['couv_tot_dose2'])
+            accounts['france'][line['clage_vacsi']]['rate_complet'] = float(line['couv_tot_complet'])
 
     # Sorts the metrics by date
     for dept in accounts:
