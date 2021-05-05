@@ -93,64 +93,64 @@ app.component('fr-map', {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">1e dose</th>
-                            <th scope="col">2e dose</th>
+                            <th scope="col">Vaccinés</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row">0-24 ans</th>
                             <td>${department.properties.metrics[24].n_tot_dose1.toLocaleString()} (${department.properties.metrics[24].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[24].n_tot_dose2.toLocaleString()} (${department.properties.metrics[24].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[24].n_tot_complet.toLocaleString()} (${department.properties.metrics[24].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">25-29 ans</th>
                             <td>${department.properties.metrics[29].n_tot_dose1.toLocaleString()} (${department.properties.metrics[29].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[29].n_tot_dose2.toLocaleString()} (${department.properties.metrics[29].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[29].n_tot_complet.toLocaleString()} (${department.properties.metrics[29].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">30-39 ans</th>
                             <td>${department.properties.metrics[39].n_tot_dose1.toLocaleString()} (${department.properties.metrics[39].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[39].n_tot_dose2.toLocaleString()} (${department.properties.metrics[39].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[39].n_tot_complet.toLocaleString()} (${department.properties.metrics[39].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">40-49 ans</th>
                             <td>${department.properties.metrics[49].n_tot_dose1.toLocaleString()} (${department.properties.metrics[49].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[49].n_tot_dose2.toLocaleString()} (${department.properties.metrics[49].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[49].n_tot_complet.toLocaleString()} (${department.properties.metrics[49].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">50-59 ans</th>
                             <td>${department.properties.metrics[59].n_tot_dose1.toLocaleString()} (${department.properties.metrics[59].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[59].n_tot_dose2.toLocaleString()} (${department.properties.metrics[59].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[59].n_tot_complet.toLocaleString()} (${department.properties.metrics[59].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">60-64 ans</th>
                             <td>${department.properties.metrics[64].n_tot_dose1.toLocaleString()} (${department.properties.metrics[64].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[64].n_tot_dose2.toLocaleString()} (${department.properties.metrics[64].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[64].n_tot_complet.toLocaleString()} (${department.properties.metrics[64].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">65-69 ans</th>
                             <td>${department.properties.metrics[69].n_tot_dose1.toLocaleString()} (${department.properties.metrics[69].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[69].n_tot_dose2.toLocaleString()} (${department.properties.metrics[69].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[69].n_tot_complet.toLocaleString()} (${department.properties.metrics[69].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">70-74 ans</th>
                             <td>${department.properties.metrics[74].n_tot_dose1.toLocaleString()} (${department.properties.metrics[74].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[74].n_tot_dose2.toLocaleString()} (${department.properties.metrics[74].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[74].n_tot_complet.toLocaleString()} (${department.properties.metrics[74].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">75-79 ans</th>
                             <td>${department.properties.metrics[79].n_tot_dose1.toLocaleString()} (${department.properties.metrics[79].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[79].n_tot_dose2.toLocaleString()} (${department.properties.metrics[79].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[79].n_tot_complet.toLocaleString()} (${department.properties.metrics[79].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">80 ans et +</th>
                             <td>${department.properties.metrics[80].n_tot_dose1.toLocaleString()} (${department.properties.metrics[80].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[80].n_tot_dose2.toLocaleString()} (${department.properties.metrics[80].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[80].n_tot_complet.toLocaleString()} (${department.properties.metrics[80].rate_complet} %)</td>
                         </tr>
                         <tr>
                             <th scope="row">Total</th>
                             <td>${department.properties.metrics[0].n_tot_dose1.toLocaleString()} (${department.properties.metrics[0].rate_dose1} %)</td>
-                            <td>${department.properties.metrics[0].n_tot_dose2.toLocaleString()} (${department.properties.metrics[0].rate_dose2} %)</td>
+                            <td>${department.properties.metrics[0].n_tot_complet.toLocaleString()} (${department.properties.metrics[0].rate_complet} %)</td>
                         </tr>
                     </tbody>
                 </table>`;
@@ -162,7 +162,7 @@ app.component('fr-map', {
         */
         setStyle(department) {
             return {
-                fillColor: this.vaxiColor(department.properties.metrics[0].rate_dose2),
+                fillColor: this.vaxiColor(department.properties.metrics[0].rate_complet),
                 weight: 1,
                 color: 'white',
                 fillOpacity: 1
