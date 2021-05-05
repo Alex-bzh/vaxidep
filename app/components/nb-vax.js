@@ -4,17 +4,17 @@ app.component('nb-vax', {
     <table class="table table-borderless table-sm">
         <thead>
             <tr>
-                <th scope="col">Nombre d’injections</th>
-                <th scope="col">Nombre de personnes vaccinées</th>
+                <th scope="col">#</th>
+                <th scope="col">Nombre de personnes</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">Au moins une dose</th>
                 <td>{{ metrics.n_tot_dose1.toLocaleString() }} ({{ metrics.rate_dose1 }} %)</td>
             </tr>
             <tr>
-                <th scope="row">2</th>
+                <th scope="row">Complètement vaccinées</th>
                 <td>{{ metrics.n_tot_complet.toLocaleString() }} ({{ metrics.rate_complet }} %)</td>
             </tr>
         </tbody>
